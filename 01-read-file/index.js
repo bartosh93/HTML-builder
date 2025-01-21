@@ -3,10 +3,10 @@ const path = require('path');
 
 const dir = '01-read-file';
 const filePath = path.join(dir, 'text.txt');
+var stream = new fs.ReadStream(filePath, { encoding: 'utf-8' });
 
-fs.readFile(filePath, function (error, data) {
-  if (error) {
-    return console.log(error);
-  }
-  console.log(data.toString());
+stream.on('readable', function () {
+  const data = stream.read();
+  console.log(data);
+  return data;
 });
